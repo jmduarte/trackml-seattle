@@ -23,7 +23,11 @@ source setup.sh
 ```
 
 ## get data
+```bash
 wget https://www.dropbox.com/s/ew4jm6jwu2quo21/public_data.zip?dl=1
+mv public_data.zip?dl=1 public_data.zip
+unzip public_data
+```
 
 ## launch jupyter
 ```bash
