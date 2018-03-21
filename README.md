@@ -1,8 +1,10 @@
 # trackml-seattle
 
 ## login to fnal/aws
+```bash
 ssh -L localhost:8899:localhost:8899 jduarte1@cmslpc-sl6@fnal.gov
 ssh -L localhost:8899:localhost:8899 ec2-user@34.215.95.84
+```
 
 ## install miniconda3
 ```bash
