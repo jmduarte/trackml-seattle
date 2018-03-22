@@ -71,10 +71,11 @@ def load_hit_generator(data_path, **kw):
     file_list = glob.glob(os.path.join(data_path, 'event*-hits*'))
     name_list = set(os.path.basename(file).split('-', 1)[0] for file in file_list)
     name_list = sorted(name_list)
-    for name, file in zip(name_list, file_list):
+    for name in name_list:
         event_id = int(name[5:])
+        file = os.path.join(data_path, name + "-hits.csv.bz2")
         yield event_id, read_hits(file, **kw)
-        
+
         
 def load_hit_truth_generator(data_path, **kw):
     """
@@ -84,12 +85,30 @@ def load_hit_truth_generator(data_path, **kw):
     concatenated as a single tuple.
     """
     file_list = glob.glob(os.path.join(data_path, 'event*-hits*'))
-    truth_file_list = glob.glob(os.path.join(data_path, 'event*-truth*'))
     name_list = set(os.path.basename(file).split('-', 1)[0] for file in file_list)
     name_list = sorted(name_list)
-    for name, file, truth_file in zip(name_list, file_list, truth_file_list):
+    for name in name_list:
         event_id = int(name[5:])
+        file = os.path.join(data_path, name + "-hits.csv.bz2")
+        truth_file = os.path.join(data_path, name + "-truth.csv.bz2")
         yield event_id, read_hits(file, **kw), read_truth(truth_file)
+        
+        
+def load_hit_particle_generator(data_path, **kw):
+    """
+    Provide an iterator over all events in a dataset directory.
+
+    For each event it returns the event_id and the output of `load_event`
+    concatenated as a single tuple.
+    """
+    file_list = glob.glob(os.path.join(data_path, 'event*-hits*'))
+    name_list = set(os.path.basename(file).split('-', 1)[0] for file in file_list)
+    name_list = sorted(name_list)
+    for name in name_list:
+        event_id = int(name[5:])
+        file = os.path.join(data_path, name + "-hits.csv.bz2")
+        particle_file = os.path.join(data_path, name + "-particles.csv.bz2")
+        yield event_id, read_hits(file, **kw), read_truth(particle_file)
 
 
 def load_hits(data_path):
