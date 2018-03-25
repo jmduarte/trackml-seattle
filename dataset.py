@@ -118,3 +118,16 @@ def load_hits(data_path):
         hit_list.append(hit)
     data = pd.concat(hit_list)
     return data
+
+
+def load_hits_truth(data_path):
+    hit_list = []
+    truth_list = []
+    for event_id, hit, truth in load_hit_truth_generator(data_path):
+        hit['event_id'] = event_id
+        truth['event_id'] = event_id
+        hit_list.append(hit)
+        truth_list.append(truth)
+    data = pd.concat(hit_list)
+    truth = pd.concat(truth_list)
+    return data, truth
