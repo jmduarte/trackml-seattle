@@ -1,4 +1,6 @@
 # trackml-seattle
+## info
+https://indico.cern.ch/event/658267/sessions/265774/
 
 ## login to fnal/aws
 ```bash
